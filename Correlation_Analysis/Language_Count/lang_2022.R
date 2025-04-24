@@ -1,0 +1,494 @@
+#### Setup Environment and Load Data ####
+
+# Load Required Libraries 
+library(readxl)
+library(dplyr)
+library(corrplot)
+library(ggcorrplot)
+library(gridExtra)
+
+
+
+# Load Data Frames 
+# Loading and cleaning individual data frames
+df1 <- read_excel("MCI_cleaned.xlsx") %>%
+  rename_with(~ tolower(trimws(.)))
+df2 <- read_excel("nri_cleaned_total.xlsx", 
+                  col_types = c("text", "text", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric")) %>%
+  rename_with(~ tolower(trimws(.)))
+df3 <- read_excel("GTMI_cleaned_new.xlsx", 
+                  col_types = c("text", "text", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric", "numeric", "numeric", 
+                                "numeric")) %>%
+  rename_with(~ tolower(trimws(.)))
+df4 <- read_excel("3i_meta_cleaned_total.xlsx") %>%
+  rename_with(~ tolower(trimws(.)))
+df5 <- read_excel("Digital_STRI_inverted.xlsx") %>%
+  rename_with(~ tolower(trimws(.))) 
+df6 <- read_excel("EGDI_Iso.xlsx", col_types = c("numeric", 
+                                                 "text", "text", "numeric", "numeric", 
+                                                 "numeric", "numeric", "numeric", "numeric", 
+                                                 "numeric", "numeric", "numeric", "numeric", 
+                                                 "numeric", "numeric", "numeric", "numeric", 
+                                                 "numeric", "numeric", "numeric", "numeric", 
+                                                 "numeric", "numeric", "numeric", "numeric", 
+                                                 "numeric", "numeric", "numeric", "numeric", 
+                                                 "numeric", "numeric", "numeric", "numeric", 
+                                                 "numeric", "numeric", "numeric", "numeric", 
+                                                 "numeric", "numeric", "numeric", "numeric", 
+                                                 "numeric", "numeric", "numeric", "numeric", 
+                                                 "numeric", "numeric", "numeric", "numeric", 
+                                                 "numeric", "numeric", "numeric", "numeric", 
+                                                 "numeric", "numeric", "numeric", "numeric", 
+                                                 "numeric", "numeric", "numeric", "text")) %>%
+  rename_with(~ tolower(trimws(.))) 
+df7 <- read_excel("EPI.xlsx") %>%
+  rename_with(~ tolower(trimws(.)))
+df8 <- read_excel("IDI_new_cleaned.xlsx") %>%
+  rename_with(~ tolower(trimws(.)))
+df9 <- read_excel("entropy_summary.xlsx") %>%
+  rename_with(~ tolower(trimws(.))) 
+
+#### PLOT SAVING OPTIONS ####
+
+save_plot <- function(filename, expr) {
+  jpeg(filename, width = 1600, height = 1200, res = 300)
+  force(expr)
+  dev.off()
+}
+
+
+####CORRELATION ANALYSIS - FULL JOIN ####
+
+# Merge and filter data 
+target_year <- 2022
+merged_data <- df1 %>%
+  full_join(df2, by = c("isocode", "year")) %>%
+  full_join(df3, by = c("isocode", "year")) %>%
+  full_join(df4, by = c("isocode", "year")) %>%
+  full_join(df5, by = c("isocode", "year")) %>%
+  full_join(df6, by = c("isocode", "year")) %>%
+  full_join(df7, by = c("isocode", "year")) %>%
+  full_join(df8, by = c("isocode", "year")) %>%
+  filter(year == target_year) %>%
+  full_join(df9, by = "isocode")
+
+# Extract index columns from digitization dfs
+idx_columns <- grep(".*\\(idx\\)$", colnames(merged_data), value = TRUE)
+
+# Combine, subset and rename columns
+selected_columns <- c(idx_columns, "language_count")
+numeric_data <- merged_data[, selected_columns]
+colnames(numeric_data) <- c("MCI", "NRI", "GTMI", "3i", 
+                            "DSTRI", "EGDI", "EPI", "IDI", "language_count")
+
+# Convert language count to its logarithm
+numeric_data$language_count <- log(numeric_data$language_count)
+
+# Compute correlation matrices
+# Complete correlation matrix
+cor_matrix <- cor(numeric_data, use = "complete.obs") 
+
+# Pairwise complete correlation matrix
+cor_matrix_pair <- cor(numeric_data, use = "pairwise.complete.obs")  
+
+# Display correlation matrices
+print(cor_matrix)
+print(cor_matrix_pair)
+
+                    # MCI       NRI       GTMI        3i       DSTRI
+# MCI            1.0000000 0.9462429 0.66939205 0.9577020  0.35093829
+# NRI            0.9462429 1.0000000 0.57814935 0.8889368  0.37374810
+# GTMI           0.6693921 0.5781493 1.00000000 0.7174214  0.21079906
+# 3i             0.9577020 0.8889368 0.71742138 1.0000000  0.25746351
+# DSTRI          0.3509383 0.3737481 0.21079906 0.2574635  1.00000000
+# EGDI           0.9658784 0.9260622 0.71626300 0.9530529  0.24742235
+# EPI            0.8230132 0.8363645 0.67771233 0.8353496  0.23632174
+# IDI            0.9468113 0.8747659 0.65685524 0.9435641  0.21950821
+# language_count 0.1549546 0.1890278 0.05892324 0.1952555 -0.02845967
+                    # EGDI       EPI       IDI language_count
+# MCI            0.9658784 0.8230132 0.9468113     0.15495464
+# NRI            0.9260622 0.8363645 0.8747659     0.18902784
+# GTMI           0.7162630 0.6777123 0.6568552     0.05892324
+# 3i             0.9530529 0.8353496 0.9435641     0.19525552
+# DSTRI          0.2474224 0.2363217 0.2195082    -0.02845967
+# EGDI           1.0000000 0.8854065 0.9400531     0.13869230
+# EPI            0.8854065 1.0000000 0.7828080     0.27422309
+# IDI            0.9400531 0.7828080 1.0000000     0.12550650
+# language_count 0.1386923 0.2742231 0.1255065     1.00000000
+
+                      # MCI       NRI      GTMI         3i
+# MCI            1.00000000 0.9397133 0.7514288 0.94436206
+# NRI            0.93971333 1.0000000 0.6665383 0.88578717
+# GTMI           0.75142875 0.6665383 1.0000000 0.72351249
+# 3i             0.94436206 0.8857872 0.7235125 1.00000000
+# DSTRI          0.35881935 0.3877676 0.2669457 0.25370089
+# EGDI           0.95578353 0.9272241 0.7623832 0.92641589
+# EPI            0.81277095 0.8341301 0.7942896 0.77780394
+# IDI            0.91794546 0.8318530 0.5495716 0.91386377
+# language_count 0.01382353 0.1117779 0.3245845 0.07665869
+                    # DSTRI       EGDI       EPI         IDI
+# MCI             0.35881935 0.95578353 0.8127709  0.91794546
+# NRI             0.38776761 0.92722413 0.8341301  0.83185303
+# GTMI            0.26694570 0.76238316 0.7942896  0.54957159
+# 3i              0.25370089 0.92641589 0.7778039  0.91386377
+# DSTRI           1.00000000 0.30758113 0.3306398  0.23061207
+# EGDI            0.30758113 1.00000000 0.8462563  0.89578953
+# EPI             0.33063975 0.84625628 1.0000000  0.62312762
+# IDI             0.23061207 0.89578953 0.6231276  1.00000000
+# language_count -0.01848776 0.08513773 0.2943554 -0.07568261
+              # language_count
+# MCI                0.01382353
+# NRI                0.11177789
+# GTMI               0.32458449
+# 3i                 0.07665869
+# DSTRI             -0.01848776
+# EGDI               0.08513773
+# EPI                0.29435537
+# IDI               -0.07568261
+# language_count     1.00000000
+
+# significant difference for MCI/GTMI/IDI vs language count
+
+write.csv(cor_matrix, "2022_1_cor_matrix.csv", row.names = TRUE)
+write.csv(cor_matrix_pair, "2022_2_cor_matrix_pair.csv", row.names = TRUE)
+
+
+#### Correlation Plots ####
+# Heatmap
+plot1 <- ggcorrplot(cor_matrix_pair, hc.order = TRUE,  
+                    type = "lower",  
+                    colors = c("#6D9EC1", "yellow", "#E46726")) +
+  ggtitle("Correlation Heatmap (pairwise complete obs.) 2022") +  # Add title
+  theme(
+    axis.text.x = element_text(size = 8),
+    axis.text.y = element_text(size = 8),
+    plot.title = element_text(hjust = 0.5, size = 12, face = "bold")  # Center title
+  )
+
+plot2 <- ggcorrplot(cor_matrix, hc.order = TRUE,  
+                    type = "lower",  
+                    colors = c("#6D9EC1", "yellow", "#E46726")) +
+  ggtitle("Correlation Heatmap (complete obs.) 2022") +  # Add title
+  theme(
+    axis.text.x = element_text(size = 8),
+    axis.text.y = element_text(size = 8),
+    plot.title = element_text(hjust = 0.5, size = 12, face = "bold")  # Center title
+  )
+
+# Arrange plots
+save_plot("2022_01_plot_heatmap.jpg", {
+  grid.arrange(plot1, plot2, nrow = 2)
+})
+
+# Pairs plot 
+# Define a custom panel for correlation coefficient
+panel.cor = function(x, y, digits = 2, cex.cor = 0.6, alpha = 0.05, ...)
+{
+  par(usr = c(0, 1, 0, 1)) # axes range
+  r = cor.test(x, y) # correlation test 
+  if(r$p.value < alpha) star = "*" else star = "" # add star if significant 
+  txt = paste(round(r$estimate, digits), star) # define text
+  text(0.5, 0.5, txt, cex = cex.cor) # add text to box
+}
+
+# Generate the pairs plot
+save_plot("2022_02_plot_pairs.jpg", pairs(
+  ~ MCI + NRI + GTMI + `3i`+ DSTRI + EGDI + EPI + IDI +  language_count, 
+  data = numeric_data, 
+  lower.panel = panel.cor,
+  labels = c("MCI", "NRI", "GTMI", "3i", "DSTRI", "EGDI", "EPI", "IDI", "language\ncount"),
+  cex.labels = 0.6,
+  main = "Pairwise Correlations Plot with language count (2022)" 
+))
+
+#### Summary Statistics #####
+
+
+# Inferential Metrics of Correlation Analysis - complete
+
+# Helper function: Categorize effect strength based on correlation
+effect_strength <- function(correlation) {
+  if (abs(correlation) < 0.1) {
+    return("Very Small")
+  } else if (abs(correlation) < 0.3) {
+    return("Small")
+  } else if (abs(correlation) < 0.5) {
+    return("Medium")
+  } else {
+    return("Large")
+  }
+}
+
+# Helper function: Determine significance based on confidence intervals
+is_significant <- function(ci_lower, ci_upper) {
+  if (ci_lower > 0 | ci_upper < 0) {  # If CI does not include 0
+    return("*")
+  } else {
+    return("")
+  }
+}
+
+# Helper function: Determine the direction of the correlation
+correlation_direction <- function(correlation) {
+  if (correlation > 0) {
+    return("Positive")
+  } else {
+    return("Negative")
+  }
+}
+
+# Helper function: Compute confidence intervals for correlations
+cor_ci <- function(x, y) {
+  test <- cor.test(x, y, use = "complete.obs")
+  return(c(lower = test$conf.int[1], upper = test$conf.int[2]))
+}
+
+# Main workflow
+# Compute correlation matrix
+# Helper function: Format p-value for small numbers
+format_p_value <- function(p_value) {
+  if (p_value < 1e-7) {
+    return(format(p_value, scientific = TRUE, digits = 3))
+  } else {
+    return(round(p_value, 7))
+  }
+}
+
+# Function to calculate p-value for correlation
+cor_p_value <- function(x, y) {
+  cor_test <- cor.test(x, y)  # Perform the correlation test
+  return(cor_test$p.value)   # Extract and return the p-value
+}
+
+# Existing code
+# Initialize an empty data frame for the summary
+summary_df <- data.frame(
+  Variable1 = character(),
+  Variable2 = character(),
+  Correlation = numeric(),
+  P_Value = character(),  # Changed to character to store scientific notation
+  EffectStrength = character(),
+  Significance = character(),
+  Direction = character(),
+  stringsAsFactors = FALSE
+)
+
+# Loop through the upper triangle of the correlation matrix
+for (i in 1:(nrow(cor_matrix) - 1)) {
+  for (j in (i + 1):ncol(cor_matrix)) {
+    # Compute p-value
+    p_value <- cor_p_value(numeric_data[[i]], numeric_data[[j]])
+    
+    # Add a row to the summary data frame
+    summary_df <- rbind(
+      summary_df,
+      data.frame(
+        Variable1 = colnames(numeric_data)[i],
+        Variable2 = colnames(numeric_data)[j],
+        Correlation = round(cor_matrix[i, j], 5),
+        P_Value = format_p_value(p_value),  # Use scientific notation for small p-values
+        EffectStrength = effect_strength(cor_matrix[i, j]),
+        Significance = ifelse(p_value < 0.05, "*", ""),
+        Direction = correlation_direction(cor_matrix[i, j]),
+        row.names = NULL  # Ensure no row names are added
+      )
+    )
+  }
+}
+
+# Display the Inferential Metrics
+print(summary_df, row.names = FALSE)
+
+write.csv(summary_df, "2022_03_table_summary_comp.csv", row.names = TRUE)
+
+# Inferential Metrics of Correlation Analysis - pairwise
+
+# Helper function: Categorize effect strength based on correlation
+effect_strength <- function(correlation) {
+  if (abs(correlation) < 0.1) {
+    return("Very Small")
+  } else if (abs(correlation) < 0.3) {
+    return("Small")
+  } else if (abs(correlation) < 0.5) {
+    return("Medium")
+  } else {
+    return("Large")
+  }
+}
+
+# Helper function: Determine significance based on confidence intervals
+is_significant <- function(ci_lower, ci_upper) {
+  if (ci_lower > 0 | ci_upper < 0) {  # If CI does not include 0
+    return("*")
+  } else {
+    return("")
+  }
+}
+
+# Helper function: Determine the direction of the correlation
+correlation_direction <- function(correlation) {
+  if (correlation > 0) {
+    return("Positive")
+  } else {
+    return("Negative")
+  }
+}
+
+# Helper function: Compute confidence intervals for correlations
+cor_ci <- function(x, y) {
+  test <- cor.test(x, y, use = "pairwise.complete.obs")
+  return(c(lower = test$conf.int[1], upper = test$conf.int[2]))
+}
+
+# Main workflow
+# Compute correlation matrix
+# Helper function: Format p-value for small numbers
+format_p_value <- function(p_value) {
+  if (p_value < 1e-7) {
+    return(format(p_value, scientific = TRUE, digits = 3))
+  } else {
+    return(round(p_value, 7))
+  }
+}
+
+# Function to calculate p-value for correlation
+cor_p_value <- function(x, y) {
+  cor_test <- cor.test(x, y)  # Perform the correlation test
+  return(cor_test$p.value)   # Extract and return the p-value
+}
+
+# Existing code
+# Initialize an empty data frame for the summary
+summary_df <- data.frame(
+  Variable1 = character(),
+  Variable2 = character(),
+  Correlation = numeric(),
+  P_Value = character(),  # Changed to character to store scientific notation
+  EffectStrength = character(),
+  Significance = character(),
+  Direction = character(),
+  stringsAsFactors = FALSE
+)
+
+# Loop through the upper triangle of the correlation matrix
+for (i in 1:(nrow(cor_matrix_pair) - 1)) {
+  for (j in (i + 1):ncol(cor_matrix_pair)) {
+    # Compute p-value
+    p_value <- cor_p_value(numeric_data[[i]], numeric_data[[j]])
+    
+    # Add a row to the summary data frame
+    summary_df <- rbind(
+      summary_df,
+      data.frame(
+        Variable1 = colnames(numeric_data)[i],
+        Variable2 = colnames(numeric_data)[j],
+        Correlation = round(cor_matrix_pair[i, j], 5),
+        P_Value = format_p_value(p_value),  # Use scientific notation for small p-values
+        EffectStrength = effect_strength(cor_matrix_pair[i, j]),
+        Significance = ifelse(p_value < 0.05, "*", ""),
+        Direction = correlation_direction(cor_matrix_pair[i, j]),
+        row.names = NULL  # Ensure no row names are added
+      )
+    )
+  }
+}
+
+# Display the Inferential Metrics
+print(summary_df, row.names = FALSE)
+
+write.csv(summary_df, "2022_04_table_summary_pair.csv", row.names = TRUE)
+
+
+#### CORRELATION ANALYSIS - INNER JOIN ####
+
+# Merge and filter data
+
+
+# Merge and filter data 
+target_year <- 2022
+merged_data <- df1 %>%
+  inner_join(df2, by = c("isocode", "year")) %>%
+  inner_join(df3, by = c("isocode", "year")) %>%
+  inner_join(df4, by = c("isocode", "year")) %>%
+  inner_join(df5, by = c("isocode", "year")) %>%
+  inner_join(df6, by = c("isocode", "year")) %>%
+  inner_join(df7, by = c("isocode", "year")) %>%
+  inner_join(df8, by = c("isocode", "year")) %>%
+  filter(year == target_year) %>%
+  inner_join(df9, by = "isocode")
+
+# Extract index columns from digitization dfs
+idx_columns <- grep(".*\\(idx\\)$", colnames(merged_data), value = TRUE)
+
+# Combine, subset and rename columns
+selected_columns <- c(idx_columns, "language_count")
+numeric_data <- merged_data[, selected_columns]
+colnames(numeric_data) <- c("MCI", "NRI", "GTMI", "3i", 
+                            "DSTRI", "EGDI", "EPI", "IDI","language_count")
+
+# Convert language count to its logarithm
+numeric_data$language_count <- log(numeric_data$language_count)
+
+# Check for NAs
+any(is.na(numeric_data))
+# False > no difference between complete and pairwise obs
+
+# Compute correlation matrix
+# Complete correlation matrix
+cor_matrix <- cor(numeric_data, use = "complete.obs") 
+
+# Display correlation matrix
+print(cor_matrix)
+
+# identical to full join complete
