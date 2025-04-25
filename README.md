@@ -15,7 +15,7 @@ This folder contains all scripts related to the analytical steps of the thesis. 
   Scripts for the hierarchical cluster analysis of digitization measures, organized by year (2004–2023).
 
 - **`correlation_analysis/`**  
-  Scripts for year-by-year correlation analyses between digitization indices and diversity measures. Subdivided by measure:
+  Scripts for year-by-year (2004-2023) correlation analyses between digitization indices and diversity measures. Subdivided by measure:
   - `entropy/`
   - `language_count/`
   - `RLI/` (Red List Index)
@@ -26,9 +26,9 @@ This folder contains all scripts related to the analytical steps of the thesis. 
 ---
 
 ### `datasets/`
-Contains the datasets used in the thesis:
+Contains the datasets used in the thesis in csv format:
 - Digitization indices
-- Language diversity measures
+- Linguistic diversity measures
 
 ---
 
