@@ -40,5 +40,24 @@ Scripts for exploratory analysis, including:
 
 ---
 
+## 📦 Dependencies
+
+To run the scripts in this project, the following R packages are required or recommended:
+
+### 📊 Core Analysis (Cluster, Correlation, Breadth)
+- `dplyr`, `tidyr`, `readxl` – data manipulation & loading
+- `clValid`, `corrplot`, `ggcorrplot`, `factoextra`, `dendextend`, `gridExtra` – statistical & visual analysis
+
+### 📈 Visualization
+- `ggplot2`, `viridis`, `scales` – general plots and styling
+- `stringr`, `purrr`, `rlang` – used in helper functions (mostly in EDA)
+
+### 🗺️ Mapping *(optional – used in EDA only)*
+- `rnaturalearth` – required for mapping functions
+- `rnaturalearthhires` – adds high-resolution shapefiles *(install via GitHub)*
+
+---
+
+
 ## 📬 Contact
 If you have any questions about the code or analysis, feel free to contact: **[katharina.zeh@univie.ac.at]**
