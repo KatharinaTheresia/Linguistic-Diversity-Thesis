@@ -1,0 +1,240 @@
+country,isocode,language_count
+Andorra,AND,9
+United Arab Emirates,ARE,30
+Afghanistan,AFG,55
+Antigua and Barbuda,ATG,2
+Anguilla,AIA,3
+Albania,ALB,12
+Armenia,ARM,15
+Angola,AGO,58
+Argentina,ARG,51
+American Samoa,ASM,7
+Austria,AUT,43
+Australia,AUS,242
+Aruba,ABW,8
+Azerbaijan,AZE,36
+Bosnia and Herzegovina,BIH,12
+Barbados,BRB,4
+Bangladesh,BGD,48
+Belgium,BEL,78
+Burkina Faso,BFA,80
+Bulgaria,BGR,24
+Bahrain,BHR,14
+Burundi,BDI,10
+Benin,BEN,61
+Bermuda,BMU,3
+Brunei,BRN,22
+Bolivia,BOL,44
+Brazil,BRA,184
+Bahamas,BHS,5
+Bhutan,BTN,37
+Botswana,BWA,37
+Belarus,BLR,25
+Belize,BLZ,11
+Canada,CAN,243
+Cocos Islands,CCK,2
+"Congo, Democratic Republic Of",COD,185
+Central African Republic,CAF,82
+Congo,COG,242
+Switzerland,CHE,45
+Côte D'Ivoire,CIV,105
+Cook Islands,COK,6
+Chile,CHL,21
+Cameroon,CMR,289
+China,CHN,318
+Colombia,COL,91
+Costa Rica,CRI,14
+Cuba,CUB,12
+Cabo Verde,CPV,5
+Curacao,CUW,10
+Christmas Island,CXR,3
+Cyprus,CYP,23
+Czechia,CZE,33
+Germany,DEU,94
+Djibouti,DJI,10
+Denmark,DNK,67
+Dominica,DMA,5
+Dominican Republic,DOM,9
+Algeria,DZA,27
+Ecuador,ECU,27
+Estonia,EST,19
+Egypt,EGY,35
+Eritrea,ERI,16
+Spain,ESP,72
+Ethiopia,ETH,101
+Finland,FIN,54
+Fiji,FJI,23
+Falkland Islands,FLK,1
+Micronesia,FSM,24
+Faroe Islands,FRO,2
+France,FRA,93
+Gabon,GAB,51
+United Kingdom,GBR,96
+Grenada,GRD,4
+Georgia,GEO,36
+French Guiana,GUF,20
+Ghana,GHA,102
+Gibraltar,GIB,4
+Greenland,GRL,3
+Gambia,GMB,28
+Guinea,GIN,45
+Guadeloupe,GLP,5
+Equatorial Guinea,GNQ,18
+Greece,GRC,48
+Guatemala,GTM,27
+Guam,GUM,14
+Guinea-Bissau,GNB,31
+Guyana,GUY,18
+"China, Hong Kong",HKG,20
+Honduras,HND,14
+Croatia,HRV,23
+Haiti,HTI,5
+Hungary,HUN,26
+Indonesia,IDN,712
+Ireland,IRL,34
+Israel,ISR,41
+Isle of Man,IMN,2
+India,IND,416
+British Indian Ocean Territory,IOT,2
+Iraq,IRQ,30
+Iran,IRN,80
+Iceland,ISL,11
+Italy,ITA,90
+Jersey,JEY,1
+Jamaica,JAM,9
+Jordan,JOR,17
+Japan,JPN,34
+Kenya,KEN,88
+Kyrgyzstan,KGZ,34
+Cambodia,KHM,34
+Kiribati,KIR,3
+Comoros,COM,12
+Saint Kitts and Nevis,KNA,3
+"Korea, North",PRK,4
+"Korea, South",KOR,19
+Kuwait,KWT,22
+Cayman Islands,CYM,4
+Kazakhstan,KAZ,60
+Laos,LAO,97
+Lebanon,LBN,19
+Saint Lucia,LCA,4
+Liechtenstein,LIE,7
+Sri Lanka,LKA,19
+Liberia,LBR,37
+Lesotho,LSO,8
+Lithuania,LTU,15
+Luxembourg,LUX,17
+Latvia,LVA,19
+Libya,LBY,33
+Morocco,MAR,19
+Monaco,MCO,12
+Moldova,MDA,22
+Montenegro,MNE,16
+Madagascar,MDG,26
+Marshall Islands,MHL,4
+North Macedonia,MKD,17
+Mali,MLI,71
+Myanmar,MMR,138
+Mongolia,MNG,18
+"China, Macau",MAC,9
+Northern Mariana Islands,MNP,10
+Martinique,MTQ,6
+Mauritania,MRT,12
+Montserrat,MSR,2
+Malta,MLT,8
+Mauritius,MUS,17
+Maldives,MDV,6
+Malawi,MWI,23
+Mexico,MEX,302
+Malaysia,MYS,161
+Mozambique,MOZ,54
+Namibia,NAM,15
+New Caledonia,NCL,42
+Niger,NER,31
+Norfolk Island,NFK,2
+Nigeria,NGA,523
+Nicaragua,NIC,12
+Netherlands,NLD,88
+Norway,NOR,54
+Nepal,NPL,110
+Nauru,NRU,7
+Niue,NIU,1
+New Zealand,NZL,75
+Oman,OMN,33
+Panama,PAN,22
+Peru,PER,96
+French Polynesia,PYF,10
+Papua New Guinea,PNG,848
+Philippines,PHL,187
+Pakistan,PAK,75
+Poland,POL,31
+Saint Pierre and Miquelon,SPM,2
+Pitcairn,PCN,1
+Puerto Rico,PRI,7
+Palestine,PSE,9
+Portugal,PRT,31
+Palau,PLW,6
+Paraguay,PRY,36
+Qatar,QAT,19
+Reunion,REU,14
+Romania,ROU,31
+Serbia,SRB,32
+Russian Federation,RUS,144
+Rwanda,RWA,10
+Saudi Arabia,SAU,41
+Solomon Islands,SLB,76
+Seychelles,SYC,5
+Sudan,SDN,94
+Sweden,SWE,72
+Singapore,SGP,38
+Saint Helena,SHN,1
+Slovenia,SVN,15
+Svalbard and Jan Mayen,SJM,2
+Slovakia,SVK,27
+Sierra Leone,SLE,26
+San Marino,SMR,1
+Senegal,SEN,50
+Somalia,SOM,19
+Suriname,SUR,20
+South Sudan,SSD,74
+Sao Tome and Principe,STP,5
+El Salvador,SLV,8
+Sint Maarten,SXM,8
+Syria,SYR,29
+Eswatini,SWZ,9
+Turks and Caicos Islands,TCA,3
+Chad,TCD,133
+Togo,TGO,58
+Thailand,THA,92
+Tajikistan,TJK,31
+Tokelau,TKL,1
+Timor-Leste,TLS,23
+Turkmenistan,TKM,47
+Tunisia,TUN,8
+Tonga,TON,3
+Turkey,TUR,70
+Trinidad and Tobago,TTO,11
+Tuvalu,TUV,2
+Taiwan,TWN,26
+Tanzania,TZA,145
+Ukraine,UKR,72
+Uganda,UGA,65
+United States,USA,402
+Uruguay,URY,23
+Uzbekistan,UZB,57
+Vatican,VAT,1
+St Vincent and Grenadines,VCT,7
+Venezuela,VEN,55
+British Virgin Islands,VGB,3
+Virgin Islands (U.S.),VIR,5
+Vietnam,VNM,115
+Vanuatu,VUT,115
+Wallis and Futuna,WLF,3
+Western Sahara,ESH,2
+Samoa,WSM,3
+Kosovo,XKX,8
+Yemen,YEM,27
+Mayotte,MYT,7
+South Africa,ZAF,45
+Zambia,ZMB,53
+Zimbabwe,ZWE,36

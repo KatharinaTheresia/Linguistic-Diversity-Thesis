@@ -1,0 +1,247 @@
+isocode,country,RLI
+AND,Andorra,0.844444444
+ARE,United Arab Emirates (the),0.688888889
+AFG,Afghanistan,0.531914894
+ATG,Antigua and Barbuda,0.444444444
+AIA,Anguilla,0.444444444
+ALB,Albania,0.847222222
+ARM,Armenia,0.694444444
+AGO,Angola,0.522727273
+ARG,Argentina,0.416666667
+ASM,American Samoa,1
+AUT,Austria,0.76984127
+AUS,Australia,0.120665251
+ABW,Aruba,1
+ALA,Åland Islands,0.777777778
+AZE,Azerbaijan,0.58436214
+BIH,Bosnia and Herzegovina,1
+BRB,Barbados,0.5
+BGD,Bangladesh,0.635933806
+BEL,Belgium,0.644444444
+BFA,Burkina Faso,0.496392496
+BGR,Bulgaria,0.753968254
+BHR,Bahrain,0.851851852
+BDI,Burundi,0.654320988
+BEN,Benin,0.531111111
+BLM,Saint Barthélemy,0.444444444
+BMU,Bermuda,1
+BRN,Brunei Darussalam,0.490740741
+BOL,Bolivia (Plurinational State of),0.350241546
+BES,"Bonaire, Sint Eustatius and Saba",0.814814815
+BRA,Brazil,0.298274002
+BHS,Bahamas (the),0.444444444
+BTN,Bhutan,0.472222222
+BWA,Botswana,0.585185185
+BLR,Belarus,0.740740741
+BLZ,Belize,0.722222222
+CAN,Canada,0.273989899
+CCK,Cocos (Keeling) Islands (the),0.722222222
+COD,Congo (the Democratic Republic of the),0.463312369
+CAF,Central African Republic (the),0.457831325
+COG,Congo (the),0.465277778
+CHE,Switzerland,0.623931624
+CIV,Côte d'Ivoire,0.473570658
+COK,Cook Islands (the),0.422222222
+CHL,Chile,0.377777778
+CMR,Cameroon,0.444444444
+CHN,China,0.441870442
+COL,Colombia,0.373283396
+CRI,Costa Rica,0.444444444
+CUB,Cuba,0.638888889
+CPV,Cabo Verde,1
+CUW,Curaçao,1
+CXR,Christmas Island,1
+CYP,Cyprus,0.740740741
+CZE,Czechia,0.763888889
+DEU,Germany,0.543209877
+DJI,Djibouti,0.933333333
+DNK,Denmark,0.722222222
+DMA,Dominica,0.444444444
+DOM,Dominican Republic (the),0.888888889
+DZA,Algeria,0.5
+ECU,Ecuador,0.421296296
+EST,Estonia,0.7
+EGY,Egypt,0.572649573
+ESH,Western Sahara*,0.666666667
+ERI,Eritrea,0.6
+ESP,Spain,0.581699346
+ETH,Ethiopia,0.517704518
+FIN,Finland,0.622222222
+FJI,Fiji,0.544444444
+FLK,Falkland Islands (the) [Malvinas],1
+FSM,Micronesia (Federated States of),0.513888889
+FRO,Faroe Islands (the),0.851851852
+FRA,France,0.545454545
+GAB,Gabon,0.383597884
+GBR,United Kingdom of Great Britain and Northern Ireland (the),0.444444444
+GRD,Grenada,0.444444444
+GEO,Georgia,0.615740741
+GUF,French Guiana,0.598290598
+GBP,Guernsey,1
+GHA,Ghana,0.546296296
+GIB,Gibraltar,1
+GRL,Greenland,0.851851852
+GMB,Gambia (the),0.537037037
+GIN,Guinea,0.482323232
+GLP,Guadeloupe,0.722222222
+GNQ,Equatorial Guinea,0.454545455
+GRC,Greece,0.513888889
+SGS,South Georgia and the South Sandwich Islands,1
+GTM,Guatemala,0.490421456
+GUM,Guam,0.722222222
+GNB,Guinea-Bissau,0.485185185
+GUY,Guyana,0.417989418
+HKG,Hong Kong,0.444444444
+HND,Honduras,0.444444444
+HRV,Croatia,0.712962963
+HTI,Haiti,0.666666667
+HUN,Hungary,0.842592593
+IDN,Indonesia,0.361557178
+IRL,Ireland,0.583333333
+ISR,Israel,0.416666667
+IMN,Isle of Man,0.5
+IND,India,0.472035794
+IOT,British Indian Ocean Territory (the),1
+IRQ,Iraq,0.555555556
+IRN,Iran (Islamic Republic of),0.431111111
+ISL,Iceland,0.722222222
+ITA,Italy,0.5
+JEY,Jersey,0.555555556
+JAM,Jamaica,0.472222222
+JOR,Jordan,0.666666667
+JPN,Japan,0.307692308
+KEN,Kenya,0.514619883
+KGZ,Kyrgyzstan,0.833333333
+KHM,Cambodia,0.461538462
+KIR,Kiribati,1
+COM,Comoros (the),0.611111111
+KNA,Saint Kitts and Nevis,0.444444444
+PRK,Korea (the Democratic People's Republic of),1
+KOR,Korea (the Republic of),0.62962963
+KWT,Kuwait,0.648148148
+CYM,Cayman Islands (the),1
+KAZ,Kazakhstan,0.64957265
+LAO,Lao People's Democratic Republic (the),0.465432099
+LBN,Lebanon,0.777777778
+LCA,Saint Lucia,0.555555556
+LIE,Liechtenstein,0.62962963
+LKA,Sri Lanka,0.555555556
+LBR,Liberia,0.516516517
+LSO,Lesotho,1
+LTU,Lithuania,0.655555556
+LUX,Luxembourg,0.75
+LVA,Latvia,0.666666667
+LBY,Libya,0.533333333
+MAR,Morocco,0.603174603
+MCO,Monaco,0.62962963
+MDA,Moldova (the Republic of),0.80952381
+MNE,Montenegro,0.851851852
+MAF,Saint Martin (French part),0.444444444
+MDG,Madagascar,0.515151515
+MHL,Marshall Islands (the),1
+MKD,North Macedonia,0.740740741
+MLI,Mali,0.511415525
+MMR,Myanmar,0.514925373
+MNG,Mongolia,0.682539683
+MAC,Macao,0.277777778
+MNP,Northern Mariana Islands (the),0.62962963
+MTQ,Martinique,0.444444444
+MRT,Mauritania,0.580246914
+MSR,Montserrat,0.444444444
+MLT,Malta,0.777777778
+MUS,Mauritius,0.666666667
+MDV,Maldives,1
+MWI,Malawi,0.534188034
+MEX,Mexico,0.391941392
+MYS,Malaysia,0.37962963
+MOZ,Mozambique,0.56980057
+NAM,Namibia,0.599206349
+NCL,New Caledonia,0.301587302
+NER,Niger (the),0.592592593
+NFK,Norfolk Island,0.722222222
+NGA,Nigeria,0.423637924
+NIC,Nicaragua,0.344444444
+NLD,Netherlands (Kingdom of the),0.67251462
+NOR,Norway,0.555555556
+NPL,Nepal,0.412037037
+NRU,Nauru,1
+NIU,Niue,1
+NZL,New Zealand,0.37037037
+OMN,Oman,0.452380952
+PAN,Panama,0.523809524
+PER,Peru,0.38034188
+PYF,French Polynesia,0.349206349
+PNG,Papua New Guinea,0.424357354
+PHL,Philippines (the),0.487867178
+PAK,Pakistan,0.511111111
+POL,Poland,0.635802469
+SPM,Saint Pierre and Miquelon,1
+PCN,Pitcairn,0.722222222
+PRI,Puerto Rico,0.5
+PSE,"Palestine, State of",0.507936508
+PRT,Portugal,0.62962963
+PLW,Palau,0.555555556
+PRY,Paraguay,0.515555556
+QAT,Qatar,0.888888889
+REU,Réunion,0.444444444
+ROU,Romania,0.745098039
+SRB,Serbia,0.829059829
+RUS,Russian Federation (the),0.470760234
+RWA,Rwanda,0.761904762
+SAU,Saudi Arabia,0.62037037
+SLB,Solomon Islands,0.444444444
+SYC,Seychelles,1
+SDN,Sudan (the),0.419312169
+SWE,Sweden,0.495726496
+SGP,Singapore,0.603174603
+SHN,"Saint Helena, Ascension and Tristan da Cunha",1
+SVN,Slovenia,0.833333333
+SJM,Svalbard and Jan Mayen,1
+SVK,Slovakia,0.811111111
+SLE,Sierra Leone,0.54040404
+SMR,San Marino,1
+SEN,Senegal,0.509043928
+SOM,Somalia,0.566666667
+SUR,Suriname,0.512345679
+SSD,South Sudan,0.471841705
+STP,Sao Tome and Principe,0.222222222
+SLV,El Salvador,0.412698413
+SXM,Sint Maarten (Dutch part),0.722222222
+SYR,Syrian Arab Republic (the),0.580246914
+SWZ,Eswatini,0.944444444
+TCA,Turks and Caicos Islands (the),0.333333333
+TCD,Chad,0.46449457
+ATF,French Southern Territories (the),1
+TGO,Togo,0.560185185
+THA,Thailand,0.514459665
+TJK,Tajikistan,0.746031746
+TKL,Tokelau,0.333333333
+TLS,Timor-Leste,0.419191919
+TKM,Turkmenistan,0.767676768
+TUN,Tunisia,0.481481481
+TON,Tonga,0.666666667
+TUR,Türkiye,0.621527778
+TTO,Trinidad and Tobago,0.472222222
+TUV,Tuvalu,0.888888889
+TWN,Taiwan (Province of China),0.260869565
+TZA,"Tanzania, the United Republic of",0.443548387
+UKR,Ukraine,0.671296296
+UGA,Uganda,0.573737374
+UMI,United States Minor Outlying Islands (the),1
+USA,United States of America (the),0.186440678
+URY,Uruguay,0.777777778
+UZB,Uzbekistan,0.688888889
+VAT,Holy See (the),0.5
+VCT,Saint Vincent and the Grenadines,0.444444444
+VEN,Venezuela (Bolivarian Republic of),0.362962963
+VGB,Virgin Islands (British),0.444444444
+VIR,Virgin Islands (U.S.),0.222222222
+VNM,Viet Nam,0.43043043
+VUT,Vanuatu,0.392523364
+WLF,Wallis and Futuna,0.555555556
+WSM,Samoa,1
+YEM,Yemen,0.444444444
+MYT,Mayotte,0.444444444
+ZAF,South Africa,0.514814815
+ZMB,Zambia,0.543735225
+ZWE,Zimbabwe,0.598290598
