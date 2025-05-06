@@ -4,9 +4,11 @@
 library(readxl)
 library(dplyr)
 library(ggplot2)
-library(rnaturalearth)
 library(viridis)
 library(scales)
+library(rnaturalearth)
+library(devtools)
+devtools::install_github("ropensci/rnaturalearthhires")
 
 
 # Load Data Frames 
@@ -21,7 +23,7 @@ df2 <- read_excel("RLI_codes.xlsx") %>%
 
 # Load World Map 
 
-world <- ne_countries(scale = "medium", returnclass = "sf")
+world <- ne_countries(scale = "large", returnclass = "sf")
 
 # Join entropy data
 
@@ -34,9 +36,8 @@ world_data <- world_data %>%
   mutate(rescaled_entropy = rescale(entropy, to = c(0, 1)))
 
 
-
 ggplot(data = world_data) +
-  geom_sf(aes(fill = rescaled_entropy), color = NA) +
+  geom_sf(aes(fill = rescaled_entropy), color = "grey30", size = 0.05) +  # <-- Borders here
   scale_fill_viridis(
     option = "turbo",
     na.value = "white",
@@ -45,8 +46,8 @@ ggplot(data = world_data) +
       direction = "horizontal",
       barwidth = 10,
       barheight = 0.4,
-      title.position = "top",  # Move title above bar to avoid overlap
-      title.hjust = 0.5        # Center the title
+      title.position = "top",
+      title.hjust = 0.5
     )
   ) +
   theme_minimal() +
@@ -64,7 +65,7 @@ ggplot(data = world_data) +
 
 # Load World Map
 
-world <- ne_countries(scale = "medium", returnclass = "sf")
+world <- ne_countries(scale = "large", returnclass = "sf")
 
 
 # Join RLI data
@@ -72,9 +73,8 @@ world <- ne_countries(scale = "medium", returnclass = "sf")
 world_data <- world %>%
   left_join(df2, by = c("iso_a3_eh" = "isocode"))
 
-
 ggplot(data = world_data) +
-  geom_sf(aes(fill = rli), color = NA) +
+  geom_sf(aes(fill = rli), color = "grey30", size = 0.05) +  # <-- Borders here
   scale_fill_viridis(
     option = "turbo",
     na.value = "white",
@@ -83,8 +83,8 @@ ggplot(data = world_data) +
       direction = "horizontal",
       barwidth = 10,
       barheight = 0.4,
-      title.position = "top",  # Move title above bar to avoid overlap
-      title.hjust = 0.5        # Center the title
+      title.position = "top",
+      title.hjust = 0.5
     )
   ) +
   theme_minimal() +
@@ -96,12 +96,13 @@ ggplot(data = world_data) +
     plot.margin = margin(5, 5, 5, 5)
   )
 
+
 #### Drawing a map with language count ####
 
 # Load World Map 
 
 
-world <- ne_countries(scale = "medium", returnclass = "sf")
+world <- ne_countries(scale = "large", returnclass = "sf")
 
 # Join language_count data
 
@@ -116,8 +117,9 @@ world_data <- world_data %>%
   mutate(rescaled_language_count = rescale(language_count, to = c(0, 1)))
 
 
+
 ggplot(data = world_data) +
-  geom_sf(aes(fill = rescaled_language_count), color = NA) +
+  geom_sf(aes(fill = rescaled_language_count), color = "grey30", size = 0.05) +  # <-- Borders here
   scale_fill_viridis(
     option = "turbo",
     na.value = "white",
@@ -126,8 +128,8 @@ ggplot(data = world_data) +
       direction = "horizontal",
       barwidth = 10,
       barheight = 0.4,
-      title.position = "top",  # Move title above bar to avoid overlap
-      title.hjust = 0.5        # Center the title
+      title.position = "top",
+      title.hjust = 0.5
     )
   ) +
   theme_minimal() +
@@ -138,4 +140,3 @@ ggplot(data = world_data) +
     plot.title = element_text(size = 12, face = "bold", hjust = 0.5),
     plot.margin = margin(5, 5, 5, 5)
   )
-
