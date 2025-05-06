@@ -26,10 +26,14 @@ This folder contains all scripts related to the analytical steps of the thesis. 
 ---
 
 ### `datasets/`
-Contains the datasets used in the thesis in csv format:
-- Digitization indices
+
+Contains the datasets used in the thesis in CSV format:
+
+- Digitization indices  
 - Linguistic diversity measures  
+
 📖 See [datasets/data_sources.md](datasets/data_sources.md) for source information.
+
 ---
 
 ### `EDA/` *(Exploratory Data Analysis)*
