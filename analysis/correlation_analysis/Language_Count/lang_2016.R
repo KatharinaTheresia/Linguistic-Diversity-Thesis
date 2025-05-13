@@ -48,15 +48,6 @@ df7 <- read_excel("entropy_summary.xlsx") %>%
   rename_with(~ tolower(trimws(.))) 
 
 
-#### PLOT SAVING OPTIONS ####
-
-save_plot <- function(filename, expr) {
-  jpeg(filename, width = 1600, height = 1200, res = 300)
-  force(expr)
-  dev.off()
-}
-
-
 ####CORRELATION ANALYSIS - FULL JOIN ####
 
 # Merge and filter data 
@@ -147,7 +138,7 @@ plot <- ggcorrplot(cor_matrix_pair, hc.order = TRUE,
   )
 
 # Display the heatmap
-save_plot("2016_01_plot_heatmap.jpg", print(plot))
+print(plot)
 
 # Pairs plot 
 # Define a custom panel for correlation coefficient
@@ -161,14 +152,14 @@ panel.cor = function(x, y, digits = 2, cex.cor = 1.2, alpha = 0.05, ...)
 }
 
 # Generate the pairs plot
-save_plot("2016_02_plot_pairs.jpg", pairs(
+pairs(
   ~ MCI + DSTRI + EGDI + DAI + IDI + EPI + language_count, 
   data = numeric_data, 
   lower.panel = panel.cor,
   labels = c("MCI", "DSTRI", "EGDI", "DAI", "IDI", "EPI", "language\ncount"),
   cex.labels = 1,
   main = "Pairwise Correlations Plot with language count (2016)" 
-))
+)
 
 
 #### Summary Statistics #####

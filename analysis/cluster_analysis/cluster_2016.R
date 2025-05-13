@@ -48,16 +48,6 @@ df5 <- read_excel("IDI_old_cleaned.xlsx",
 df6 <- read_excel("EPI.xlsx") %>%
   rename_with(~ tolower(trimws(.))) 
 
-#### PLOT SAVING OPTIONS ####
-
-save_plot <- function(filename, expr) {
-  jpeg(filename, width = 1600, height = 1200, res = 300)
-  force(expr)
-  dev.off()
-}
-
-
-
 ####CORRELATION ANALYSIS - FULL JOIN ####
 
 # Merge and filter data 
@@ -127,7 +117,7 @@ plot <- ggcorrplot(cor_matrix, hc.order = TRUE,
   )
 
 # Display the heatmap
-save_plot("2016_01_heatmap.jpg", print(plot))
+print(plot)
 
 # Pairs plot 
 # Define a custom panel for correlation coefficient
@@ -140,8 +130,8 @@ panel.cor = function(x, y, digits = 2, cex.cor = 2, alpha = 0.05, ...)
   text(0.5, 0.5, txt, cex = cex.cor) # add text to box
 }
 # Generate the pairs plot
-save_plot("2016_02_pairs_idx.jpg", pairs(~ MCI + DSTRI + EGDI + DAI + IDI + EPI, data = numeric_data, lower.panel = panel.cor,
-      cex.labels = 1, main = "Correlation Pairs Plot of Indices (2016)"))
+pairs(~ MCI + DSTRI + EGDI + DAI + IDI + EPI, data = numeric_data, lower.panel = panel.cor,
+    cex.labels = 1, main = "Correlation Pairs Plot of Indices (2016)")
 
 #### Clustering - Complete Correlation Matrix (Average) ####
 # Check symmetry and positive semi-definiteness
@@ -163,9 +153,8 @@ dist_matrix <- as.dist(1 - cor_matrix)
 
 # Plot hierarchical clustering
 hc_avg <- hclust(dist_matrix, method = "average")
-save_plot("2016_03_clust_avg.jpg", {
-  plot(hc_avg, main = "Hier. Clustering (complete obs. - average) 2016")
-})
+plot(hc_avg, main = "Hier. Clustering (complete obs. - average) 2016")
+
 
 #### Validation Measures: Complete Matrix (Average) ####
 # WSS (Within Sum of Squares)
@@ -178,7 +167,7 @@ wss_result <- fviz_nbclust(
 )
 
 # Print the result
-save_plot("2016_04_wss.jpg", print(wss_result))
+print(wss_result)
 
 # Display value for optimal k
 # optimal = 2k 
@@ -196,7 +185,7 @@ silhouette_result <- fviz_nbclust(
 )
 
 # Print the result
-save_plot("2016_05_silhouette.jpg", print(silhouette_result))
+print(silhouette_result)
 
 # Display value for optimal k
 # optimal = 2k 
@@ -214,7 +203,7 @@ gap_stat_result <- fviz_nbclust(
 )
 
 # Print the result
-save_plot("2016_06_gap_stat.jpg", print(gap_stat_result))
+print(gap_stat_result)
 
 # Display value for optimal k
 # optimal = 3k
@@ -267,10 +256,8 @@ h_dunn <- sapply(valid_h, function(h) {
 })
 
 # Plot only valid values
-save_plot("2016_07_dunn.jpg", {
-  plot(valid_h, h_dunn, xlab = "Height (h)", ylab = "Dunn index")
-  grid()
-})
+plot(valid_h, h_dunn, xlab = "Height (h)", ylab = "Dunn index")
+grid()
 
 #### Visualization with optimal number of ks ####
 
@@ -285,24 +272,23 @@ plot(hc_avg)
 abline(h = 0.1769235, col = 'red')
 
 # Dendrogram with rectangular cluster highlights
-save_plot("2016_08_dend_high.jpg", {
-  par(mar = c(5, 5, 5, 5), xpd = NA)  # Allow plotting outside the margins
+
+par(mar = c(5, 5, 5, 5), xpd = NA)  # Allow plotting outside the margins
   
-  plot(hc_avg, 
+plot(hc_avg, 
        main = "Hierarchical Clustering Dendrogram (2016)",
        xlim = c(-10, length(hc_avg$order) + 10),  # Larger x-axis range
        hang = -1,                                 # Align leaves at the same baseline
        yaxt = "n",
        ylab = "Distance (1 - correlation)" )      # Suppress default y-axis ticks
   
-  axis(2, at = seq(0, 0.4, 0.05), las = 1)         # Add custom y-axis ticks
-  rect.hclust(hc_avg, k = 2, border = 2:4)         # Highlight clusters
-})
+axis(2, at = seq(0, 0.4, 0.05), las = 1)         # Add custom y-axis ticks
+rect.hclust(hc_avg, k = 2, border = 2:4)         # Highlight clusters
 
 # Dendrogram with colored branches using dendextend
 avg_col_dend <- as.dendrogram(hc_avg)
 avg_col_dend <- dendextend::color_branches(avg_col_dend, k = 2)
-save_plot("2016_09_dend_col.jpg", {plot(avg_col_dend)})
+plot(avg_col_dend)
 
 
 #### Assign Variables to Clusters  ####
@@ -323,9 +309,9 @@ dist_matrix <- as.dist(1 - cor_matrix)
 hc_cpl <- hclust(dist_matrix, method = "complete")
 
 # Plot Hierarchical Clustering
-save_plot("2016_10_clust_cpl.jpg", {
-  plot(hc_cpl, main = "Hier. Clustering (complete obs. - complete 2016)")
-})
+
+plot(hc_cpl, main = "Hier. Clustering (complete obs. - complete 2016)")
+
 # almost identical to average linkage
 
 #### CORRELATION ANALYSIS - INNER JOIN ####

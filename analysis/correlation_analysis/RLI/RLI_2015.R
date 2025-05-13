@@ -26,13 +26,6 @@ df3 <- read_excel("IDI_old_cleaned.xlsx",
 df4 <- read_excel("RLI_codes.xlsx") %>%
   rename_with(~ tolower(trimws(.))) 
 
-#### PLOT SAVING OPTIONS ####
-
-save_plot <- function(filename, expr) {
-  jpeg(filename, width = 1600, height = 1200, res = 300)
-  force(expr)
-  dev.off()
-}
 
 ####CORRELATION ANALYSIS - FULL JOIN ####
 
@@ -103,9 +96,7 @@ plot2 <- ggcorrplot(cor_matrix, hc.order = TRUE,
   )
 
 # Arrange plots
-save_plot("2015_01_plot_heatmap.jpg", {
-  grid.arrange(plot1, plot2, nrow = 2)
-})
+grid.arrange(plot1, plot2, nrow = 2)
 
 # Pairs plot 
 # Define a custom panel for correlation coefficient
@@ -118,13 +109,13 @@ panel.cor = function(x, y, digits = 2, cex.cor = 2, alpha = 0.05, ...)
   text(0.5, 0.5, txt, cex = cex.cor) # add text to box
 }
 # Generate the pairs plot
-save_plot("2015_02_plot_pairs.jpg", pairs(
+pairs(
   ~ MCI + DSTRI + IDI + RLI, 
   data = numeric_data, 
   lower.panel = panel.cor,
   cex.labels = 1,
   main = "Pairwise Correlations Plot with RLI (2015)" 
-))
+)
 
 #### Summary Statistics #####
 

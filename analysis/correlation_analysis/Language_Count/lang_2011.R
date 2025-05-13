@@ -20,13 +20,6 @@ df1 <- read_excel("IDI_old_cleaned.xlsx",
 df2 <- read_excel("entropy_summary.xlsx") %>%
   rename_with(~ tolower(trimws(.))) 
 
-#### PLOT SAVING OPTIONS ####
-
-save_plot <- function(filename, expr) {
-  jpeg(filename, width = 1600, height = 1200, res = 300)
-  force(expr)
-  dev.off()
-}
 
 ####CORRELATION ANALYSIS - FULL JOIN ####
 

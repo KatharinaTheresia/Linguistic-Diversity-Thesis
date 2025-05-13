@@ -180,7 +180,6 @@ for (df in dfs) {
 }
 
 # Rename the indices 
-
 mapping <- c(
   "mobile_connectivity_index_(idx)" = "MCI",
   "network_readiness_index_(idx)" = "NRI",

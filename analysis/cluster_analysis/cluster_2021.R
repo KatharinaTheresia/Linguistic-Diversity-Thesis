@@ -59,14 +59,6 @@ df4 <- read_excel("IDI_new_cleaned.xlsx") %>%
 df5 <- read_excel("3i_meta_cleaned_total.xlsx") %>%
   rename_with(~ tolower(trimws(.)))
 
-#### PLOT SAVING OPTIONS ####
-
-save_plot <- function(filename, expr) {
-  jpeg(filename, width = 1600, height = 1200, res = 300)
-  force(expr)
-  dev.off()
-}
-
 ####CORRELATION ANALYSIS - FULL JOIN ####
 
 # Merge and filter data 
@@ -126,9 +118,7 @@ plot2 <- ggcorrplot(cor_matrix, hc.order = TRUE,
   )
 
 # Arrange plots
-save_plot("2021_01_heatmaps.jpg", {
-  grid.arrange(plot1, plot2, nrow = 2)
-})
+grid.arrange(plot1, plot2, nrow = 2)
 
 # Pairs plot 
 # Define a custom panel for correlation coefficient
@@ -142,8 +132,8 @@ panel.cor = function(x, y, digits = 2, cex.cor = 2, alpha = 0.05, ...)
 }
 
 # Generate the pairs plot
-save_plot("2021_02_pairs_idx.jpg", pairs(~ MCI + NRI + DSTRI + IDI + `3i`,  data= numeric_data, lower.panel = panel.cor,
-      cex.labels = 1, main = "Correlation Pairs Plot of Indices (2021)"))
+pairs(~ MCI + NRI + DSTRI + IDI + `3i`,  data= numeric_data, lower.panel = panel.cor,
+    cex.labels = 1, main = "Correlation Pairs Plot of Indices (2021)")
 
 
 #### Clustering - Complete Correlation Matrix (Average) ####
@@ -159,9 +149,8 @@ dist_matrix <- as.dist(1 - cor_matrix)
 hc_avg <- hclust(dist_matrix, method = "average")
 
 # Plot hierarchical clustering
-save_plot("2021_03_clust_avg.jpg", {
-  plot(hc_avg, main = "Hier. Clustering (complete obs. - average) 2021")
-})
+plot(hc_avg, main = "Hier. Clustering (complete obs. - average) 2021")
+
 
 #### Validation Measures: Complete Matrix (Average) ####
 # WSS (Within Sum of Squares)
@@ -174,7 +163,7 @@ wss_result <- fviz_nbclust(
 )
 
 # Print the result
-save_plot("2021_04_wss.jpg", print(wss_result))
+print(wss_result)
 
 # Display value for optimal k
 # optimal = 2k 
@@ -192,7 +181,7 @@ silhouette_result <- fviz_nbclust(
 )
 
 # Print the result
-save_plot("2021_05_silhouette.jpg", print(silhouette_result))
+print(silhouette_result)
 
 # Display value for optimal k
 # optimal = 2k 
@@ -209,7 +198,7 @@ gap_stat_result <- fviz_nbclust(
 )
 
 # Print the result
-save_plot("2021_06_gap_stat.jpg", print(gap_stat_result))
+print(gap_stat_result)
 
 # Display value for optimal k
 # optimal = 2k
@@ -257,10 +246,9 @@ k_dunn <- sapply(valid_k, function(x) {
 })
 
 # Plot Dunn Index over height
-save_plot("2021_07_dunn.jpg", {
-  plot(valid_h, h_dunn, xlab = "Height (h)", ylab = "Dunn index")
-  grid()
-})
+plot(valid_h, h_dunn, xlab = "Height (h)", ylab = "Dunn index")
+grid()
+
 
 #### Visualization with optimal number of ks ####
 
@@ -275,24 +263,22 @@ plot(hc_avg)
 abline(h = 0.08359215, col = 'red')
 
 # Dendrogram with rectangular cluster highlights
-save_plot("2021_08_dend_high.jpg", {
-  par(mar = c(5, 5, 5, 5), xpd = NA)  # Allow plotting outside the margins
+par(mar = c(5, 5, 5, 5), xpd = NA)  # Allow plotting outside the margins
   
-  plot(hc_avg, 
+plot(hc_avg, 
        main = "Hierarchical Clustering Dendrogram (2021)",
        xlim = c(-10, length(hc_avg$order) + 10),  # Larger x-axis range
        hang = -1,                                 # Align leaves at the same baseline
        yaxt = "n",
        ylab = "Distance (1 - correlation)" )      # Suppress default y-axis ticks
   
-  axis(2, at = seq(0, 0.4, 0.05), las = 1)         # Add custom y-axis ticks
-  rect.hclust(hc_avg, k = 2, border = 2:4)         # Highlight clusters
-})
+axis(2, at = seq(0, 0.4, 0.05), las = 1)         # Add custom y-axis ticks
+rect.hclust(hc_avg, k = 2, border = 2:4)         # Highlight clusters
 
 # Dendrogram with colored branches using dendextend
 avg_col_dend <- as.dendrogram(hc_avg)
 avg_col_dend <- dendextend::color_branches(avg_col_dend, k = 2)
-save_plot("2021_09_dend_col.jpg", {plot(avg_col_dend)})
+plot(avg_col_dend)
 
 
 #### Assign Variables to Clusters  ####
@@ -314,9 +300,7 @@ dist_matrix <- as.dist(1 - cor_matrix)
 hc_cpl <- hclust(dist_matrix, method = "complete")
 
 # Plot Hierarchical Clustering
-save_plot("2021_10_clust_cpl.jpg", {
-  plot(hc_cpl, main = "Hier. Clustering (complete obs. - complete 2021)")
-})
+plot(hc_cpl, main = "Hier. Clustering (complete obs. - complete 2021)")
 #almost identical to average linkage
 
 
@@ -333,9 +317,7 @@ dist_matrix <- as.dist(1 - cor_matrix_pair)
 hc_avg_pair <- hclust(dist_matrix, method = "average")
 
 # Plot hierarchical clustering
-save_plot("2021_11_clust_pair_avg.jpg", {
-  plot(hc_avg_pair, main = "Hier. Clustering (pairwise obs. - average) 2021")
-})
+plot(hc_avg_pair, main = "Hier. Clustering (pairwise obs. - average) 2021")
 
 #### Validation Measures: Pairwise Complete Matrix (Average) ####
 # WSS (Within Sum of Squares)
@@ -348,7 +330,7 @@ wss_result <- fviz_nbclust(
 )
 
 # Print result
-save_plot("2021_12_pair_wss.jpg", print(wss_result))
+print(wss_result)
 
 # Display value for optimal k
 # optimal = 2k 
@@ -365,7 +347,7 @@ silhouette_result <- fviz_nbclust(
 )
 
 # Print result
-save_plot("2021_13_pair_silhouette.jpg", print(silhouette_result))
+print(silhouette_result)
 
 # Display value for optimal k
 # optimal = 2k 
@@ -382,7 +364,7 @@ gap_stat_result <- fviz_nbclust(
 )
 
 # Print result
-save_plot("2021_14_pair_gap_stat.jpg", print(gap_stat_result))
+print(gap_stat_result)
 
 # Display value for optimal k
 #optimal = 2k
@@ -420,10 +402,8 @@ h_dunn <- sapply(valid_h, function(h) {
 })
 
 # Plot only valid values
-save_plot("2021_15_pair_dunn.jpg", {
-  plot(valid_h, h_dunn, xlab = "Height (h)", ylab = "Dunn index")
-  grid()
-})
+plot(valid_h, h_dunn, xlab = "Height (h)", ylab = "Dunn index")
+grid()
 
 #### Visualization with optimal number of ks ####
 
@@ -442,9 +422,8 @@ abline(h = 0.112561, col = 'red')
 hc_cpl_pair <- hclust(dist_matrix, method = "complete")
 
 # Plot Hierachical Clustering
-save_plot("2021_16_clust_cpl_pair.jpg", {
-  plot(hc_cpl_pair, main = "Hier. Clustering (pairwise obs. - complete 2021)")
-})
+
+plot(hc_cpl_pair, main = "Hier. Clustering (pairwise obs. - complete 2021)")
 
 
 #### CORRELATION ANALYSIS - INNER JOIN ####

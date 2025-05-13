@@ -42,14 +42,6 @@ df2 <- read_excel("IDI_old_cleaned.xlsx",
 df3 <- read_excel("EPI.xlsx") %>%
   rename_with(~ tolower(trimws(.))) 
 
-#### PLOT SAVING OPTIONS ####
-
-save_plot <- function(filename, expr) {
-  jpeg(filename, width = 1600, height = 1200, res = 300)
-  force(expr)
-  dev.off()
-}
-
 
 #### CORRELATION ANALYSIS - FULL JOIN ####
 
@@ -100,7 +92,7 @@ ggtitle("Correlation Heatmap of Indices (2008)") +
   )
 
 # Display the heatmap
-save_plot("2008_01_heatmap_idx.jpg", print(plot))
+print(plot)
 
 # Pairs plot 
 # Define a custom panel for correlation coefficient
@@ -114,8 +106,13 @@ panel.cor = function(x, y, digits = 2, cex.cor = 2, alpha = 0.05, ...)
 }
 
 # Generate the pairs plot
-save_plot("2008_02_pairs_idx.jpg", pairs(~ EGDI + IDI + EPI, data = numeric_data, lower.panel = panel.cor,
-      cex.labels = 1, main = "Correlation Pairs Plot of Indices (2008)"))
+pairs(
+  ~ EGDI + IDI +EPI, 
+  data = numeric_data, 
+  lower.panel = panel.cor,
+  cex.labels = 1,
+  main = "Correlation Pairs Plot of Indices (2008)" # Add a title
+)
 
 #### Clustering - Complete Correlation Matrix (Average) ####
 # Check symmetry and positive semi-definiteness
@@ -130,9 +127,7 @@ dist_matrix <- as.dist(1 - cor_matrix)
 
 # Plot hierarchical clustering
 hc_avg <- hclust(dist_matrix, method = "average")
-save_plot("2008_03_clust_avg.jpg", {
-  plot(hc_avg, main = "Hier. Clustering (complete obs. - average) 2008")
-})
+plot(hc_avg, main = "Hier. Clustering (complete obs. - average) 2008")
 
 #### Validation Measures: Complete Matrix (Average) ####
 # WSS (Within Sum of Squares)
@@ -145,7 +140,7 @@ wss_result <- fviz_nbclust(
 )
 
 # Print the result
-save_plot("2008_04_wss.jpg", print(wss_result))
+print(wss_result)
 
 # Display value for optimal k
 
@@ -164,7 +159,7 @@ silhouette_result <- fviz_nbclust(
 )
 
 # Print the result
-save_plot("2008_05_silhouette.jpg", print(silhouette_result))
+print(silhouette_result)
 
 
 # Display value for optimal k
@@ -183,7 +178,7 @@ gap_stat_result <- fviz_nbclust(
 )
 
 # Print the result
-save_plot("2008_06_gap_stat.jpg", print(gap_stat_result))
+print(gap_stat_result)
 
 # Display value for optimal k
 # optimal = 1k
@@ -231,10 +226,9 @@ k_dunn <- sapply(valid_k, function(x) {
 })
 
 # Plot Dunn Index over height
-save_plot("2008_07_dunn.jpg", {
-  plot(valid_h, h_dunn, xlab = "Height (h)", ylab = "Dunn index")
-  grid()
-})
+
+plot(valid_h, h_dunn, xlab = "Height (h)", ylab = "Dunn index")
+grid()
 #### Visualization with optimal number of ks ####
 
 # cutoff for 2 ks 
@@ -248,10 +242,9 @@ plot(hc_avg)
 abline(h = 0.05462166, col = 'red')
 
 # Dendrogram with rectangular cluster highlights
-save_plot("2008_08_dend_high.jpg", {
-  par(mar = c(5, 5, 5, 5), xpd = NA)  # Allow plotting outside the margins
+par(mar = c(5, 5, 5, 5), xpd = NA)  # Allow plotting outside the margins
   
-  plot(hc_avg, 
+plot(hc_avg, 
        main = "Hierarchical Clustering Dendrogram (2008)",
        xlim = c(-10, length(hc_avg$order) + 10),  # Larger x-axis range
        hang = -1,                                 # Align leaves at the same baseline
@@ -260,7 +253,7 @@ save_plot("2008_08_dend_high.jpg", {
   
   axis(2, at = seq(0, 0.4, 0.05), las = 1)         # Add custom y-axis ticks
   rect.hclust(hc_avg, k = 2, border = 2:4)         # Highlight clusters
-})
+
 
 
 
@@ -268,7 +261,7 @@ save_plot("2008_08_dend_high.jpg", {
 # Dendrogram with colored branches using dendextend
 avg_col_dend <- as.dendrogram(hc_avg)
 avg_col_dend <- dendextend::color_branches(avg_col_dend, k = 2)
-save_plot("2008_09_dend_col.jpg", {plot(avg_col_dend)})
+plot(avg_col_dend)
 
 #### Assign Variables to Clusters  ####
 
@@ -288,9 +281,8 @@ dist_matrix <- as.dist(1 - cor_matrix)
 hc_cpl <- hclust(dist_matrix, method = "complete")
 
 # Plot Hierarchical Clustering
-save_plot("2008_10clust_cpl.jpg", {
-  plot(hc_cpl, main = "Hier. Clustering (complete obs. - complete 2008)")
-})
+plot(hc_cpl, main = "Hier. Clustering (complete obs. - complete 2008)")
+
 # almost identical to average linkage
 
 #### CORRELATION ANALYSIS - INNER JOIN ####

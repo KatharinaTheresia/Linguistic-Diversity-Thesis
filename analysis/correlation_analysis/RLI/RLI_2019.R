@@ -59,14 +59,6 @@ df6 <- read_excel("RLI_codes.xlsx") %>%
   rename_with(~ tolower(trimws(.))) 
 
 
-#### PLOT SAVING OPTIONS ####
-
-save_plot <- function(filename, expr) {
-  jpeg(filename, width = 1600, height = 1200, res = 300)
-  force(expr)
-  dev.off()
-}
-
 
 ####CORRELATION ANALYSIS - FULL JOIN ####
 
@@ -99,13 +91,6 @@ cor_matrix_pair <- cor(numeric_data, use = "pairwise.complete.obs")
 print(cor_matrix)
 print(cor_matrix_pair)
 
-#### PLOT SAVING OPTIONS ####
-
-save_plot <- function(filename, expr) {
-  jpeg(filename, width = 1600, height = 1200, res = 300)
-  force(expr)
-  dev.off()
-}
 
             #MCI          NRI         3i        DSTRI      DiGiX          RLI
 #MCI   1.00000000  0.272115256 0.94623130  0.36107992 0.88230445  0.074017113
@@ -145,7 +130,7 @@ plot <- ggcorrplot(cor_matrix_pair, hc.order = TRUE,
   )
 
 # Display the heatmap
-save_plot("2019_01_plot_heatmap.jpg", print(plot))
+print(plot)
 
 
 # Pairs plot 
@@ -159,13 +144,13 @@ panel.cor = function(x, y, digits = 2, cex.cor = 1.5, alpha = 0.05, ...)
   text(0.5, 0.5, txt, cex = cex.cor) # add text to box
 }
 # Generate the pairs plot
-save_plot("2019_02_plot_pairs.jpg", pairs(
+pairs(
   ~ MCI + NRI + `3i` + DSTRI + DiGiX + RLI, 
   data = numeric_data, 
   lower.panel = panel.cor,
   cex.labels = 1,
   main = "Pairwise Correlations Plot with RLI (2019)" 
-))
+)
 
 #### Summary Statistics #####
 

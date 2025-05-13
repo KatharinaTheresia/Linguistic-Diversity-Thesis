@@ -29,14 +29,6 @@ df2 <- read_excel("EPI.xlsx") %>%
   rename_with(~ tolower(trimws(.))) 
 
 
-#### PLOT SAVING OPTIONS ####
-
-save_plot <- function(filename, expr) {
-  jpeg(filename, width = 1600, height = 1200, res = 300)
-  force(expr)
-  dev.off()
-}
-
 ####CORRELATION ANALYSIS - FULL JOIN ####
 
 # Merge and filter data 
@@ -83,5 +75,10 @@ panel.cor = function(x, y, digits = 2, cex.cor = 2, alpha = 0.05, ...)
 }
 
 # Generate the pairs plot
-save_plot("2005_01_pairs_idx.jpg", pairs(~ EGDI + EPI, data = numeric_data, lower.panel = panel.cor,
-                                      cex.labels = 1, main = "Correlation Pairs Plot of Indices (2005)"))
+pairs(
+  ~ EGDI + EPI, 
+  data = numeric_data, 
+  lower.panel = panel.cor,
+  cex.labels = 1,
+  main = "Correlation Pairs Plot of Indices (2005)" # Add a title
+)

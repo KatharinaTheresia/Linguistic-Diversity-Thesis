@@ -58,13 +58,6 @@ df5 <- read_excel("DiGix_cleaned.xlsx") %>%
 df6 <- read_excel("entropy_summary.xlsx") %>%
   rename_with(~ tolower(trimws(.))) 
 
-#### PLOT SAVING OPTIONS ####
-
-save_plot <- function(filename, expr) {
-  jpeg(filename, width = 1600, height = 1200, res = 300)
-  force(expr)
-  dev.off()
-}
 
 ####CORRELATION ANALYSIS - FULL JOIN ####
 
@@ -134,7 +127,7 @@ plot <- ggcorrplot(cor_matrix_pair, hc.order = TRUE,
   )
 
 # Display the heatmap
-save_plot("2019_01_plot_heatmap.jpg", print(plot))
+print(plot)
 
 
 # Pairs plot 
@@ -148,14 +141,13 @@ panel.cor = function(x, y, digits = 2, cex.cor = 1.5, alpha = 0.05, ...)
   text(0.5, 0.5, txt, cex = cex.cor) # add text to box
 }
 # Generate the pairs plot
-save_plot("2019_02_plot_pairs.jpg", pairs(
+pairs(
   ~ MCI + NRI + `3i` + DSTRI + DiGiX + entropy, 
   data = numeric_data, 
   lower.panel = panel.cor,
   cex.labels = 1,
   main = "Pairwise Correlations Plot with Entropy (2019)" 
-))
-
+)
 
 
 #### Summary Statistics #####
